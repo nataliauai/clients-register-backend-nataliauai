@@ -9,11 +9,10 @@ Para documentação completa acesse: https://
 ## Tabela de Conteúdos
 
 - [Visão Geral](#1-visão-geral)
-- [Diagrama ER](#2-diagrama-er)
-- [Comandos](#3-Comandos)
-- [Variáveis de Ambiente](#4-variáveis-de-ambiente)
-- [Migrations](#5-migrations)
-- [Endpoints](#7-endpoints)
+- [Comandos](#2-Comandos)
+- [Variáveis de Ambiente](#3-variáveis-de-ambiente)
+- [Migrations](#4-migrations)
+- [Endpoints](#5-endpoints)
 
 ---
 
@@ -28,22 +27,10 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 - [PostgreSQL](https://www.postgresql.org/)
 - [Yup](https://www.npmjs.com/package/yup)
 
-A URL base da aplicação:
-https://
-
 ---
 
-## 2. Diagrama ER
-[ Voltar para o topo ](#tabela-de-conteúdos)
 
-
-Diagrama ER da API definindo bem as relações entre as tabelas do banco de dados.
-
-![DER](der.jfif)
-
-
-
-### 3 - Comandos
+### 2 - Comandos
 
  - Instalando Dependências
 
@@ -59,13 +46,8 @@ yarn install
 yarn dev
 ```
 
-- Para rodar testes use o comando:
 
-```shell
-yarn test
-```
-
-## 4 - Variáveis de Ambiente
+## 3 - Variáveis de Ambiente
 
 Em seguida, crie um arquivo **.env**, copiando o formato do arquivo **.env.example**:
 ```
@@ -74,7 +56,7 @@ cp .env.example .env
 
 Configure suas variáveis de ambiente com suas credenciais do Postgres e uma nova database da sua escolha.
 
-## 5 - Migrations
+## 4 - Migrations
 
 Execute as migrations com o comando:
 
@@ -84,14 +66,21 @@ yarn typeorm migration:run -d src/data-source.ts
 
 ---
 
-## 6 - Endpoints
+## 5 - Endpoints
 
-- [/]
-    - [POST   - /]()
-    - [GET    - /]()
-	- [GET    - /:id]()
-	- [PATH   - /:id]()
-	- [DELETE - /:id]()
+- [/users]
+    - [POST   - /users](Criação de usuários)
+    - [GET    - /users](Listar usuários)
+	- [GET    - /users/:id](Listar um usuário)
+	- [PATH   - /users/:id](Editar usuário)
+	- [DELETE - /users/:id](Deletar usuário)
+
+- [/contact]
+    - [POST   - /contact](Criar contatos)
+    - [GET    - /contact](Listar todos os contatos)
+	- [GET    - /contact/:id](Listar contatos de um usuário específico)
+	- [PATH   - /contact/:id](Editar contato)
+	- [DELETE - /contact/:id](Deletar contato)
 
 
 ---
@@ -99,11 +88,26 @@ yarn typeorm migration:run -d src/data-source.ts
 
 O objeto user é definido como:
 
-| Campo      | Tipo   | Descrição                                     		|
-| -----------|--------|-----------------------------------------------------|
-| id         | inteiro|                              	|
-| nome       | string |                              	|
-| idade      | string |                             	|
+| Campo        | Tipo   | Descrição                                     	|
+| -------------|--------|---------------------------------------------------|
+| id           | string | id do usuário gerado automaticamente.             |
+| name         | string | Nome completo passado no cadastro.               	|
+| phoneNumber  | string | Número de telefone.                       	    |
+| email        | string | Email válido cadastrado.                       	|
+| createdAt    | date   | Data da criação do usuário gerada automaticamente.|
+
+##  **contact**
+
+O objeto contact é definido como:
+
+| Campo        | Tipo   | Descrição                                     	|
+| -------------|--------|---------------------------------------------------|
+| id           | string | id do contato gerado automaticamente.             |
+| fullName     | string | Nome completo passado no cadastro.               	|
+| phoneNumber  | string | Número de telefone.                       	    |
+| email        | string | Email válido cadastrado.                       	|
+| createdAt    | date   | Data da criação do usuário gerada automaticamente.|
+| userId       | string | id do usuário para conexão das tabelas.           |
 
 
 ### Possíveis Erros:
