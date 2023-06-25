@@ -13,28 +13,29 @@ const createContactService = async (data: IContactRequest): Promise<IContactResp
         where: {
           id: userId,
         },
-      })) as User;
+    })) as User;
     
      
-      const verifyEmailExists = await contactRepository.findOneBy({
+    const verifyEmailExists = await contactRepository.findOneBy({
         email: email,
         user: {
           id: userId,
         },
-      });
+    });
       if (verifyEmailExists) {
         throw new AppError('Contact alredy exists.', 409);
       }
     
-      const createdContact = contactRepository.create({
+    const createdContact = contactRepository.create({
         fullName: fullName,
         email: email,
         phoneNumber: phoneNumber,
         user: user
-        
-      });
-      const returned = await contactRepository.save(createdContact);
+    });
+
+    const returned = await contactRepository.save(createdContact);
     
-      return returned;
-    };
-    export { createContactService };
+        return returned;
+};
+
+export { createContactService };

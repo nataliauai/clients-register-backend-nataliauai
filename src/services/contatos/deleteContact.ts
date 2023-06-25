@@ -2,7 +2,6 @@ import { AppDataSource } from "../../data-source";
 import Contact from "../../entities/contacts.entity";
 import AppError from "../../errors/AppError";
 
-
 const deleteContactService = async (id: string) => {
   const contactRepository = AppDataSource.getRepository(Contact);
   const contact = await contactRepository.findOne({
