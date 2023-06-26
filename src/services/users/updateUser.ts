@@ -4,8 +4,6 @@ import AppError from "../../errors/AppError";
 import { IUserUpdate } from "../../interfaces/users";
 import { userUpdateSchema } from "../../schemas/user";
 
-
-
 const updateUsersService = async (id: string, update: IUserUpdate) => {
   const userRepository = AppDataSource.getRepository(User);
 
@@ -15,7 +13,7 @@ const updateUsersService = async (id: string, update: IUserUpdate) => {
   }
   if(!update.email && !update.name && !update.phoneNumber){
     throw new AppError ("These fields cannot be updated", 401)
-}
+  }
 
   const updated = userRepository.create({
     ...findUser,
@@ -25,7 +23,7 @@ const updateUsersService = async (id: string, update: IUserUpdate) => {
 
   const validatedBody = await userUpdateSchema.validate(updated,{ 
         stripUnknown: true 
-});
+  });
 
   return validatedBody;
 };

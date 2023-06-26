@@ -1,36 +1,39 @@
 import { Request, Response } from "express";
 import { createContactService } from "../services/contatos/createContact";
 import { deleteContactService } from "../services/contatos/deleteContact";
+import { updateContactService } from "../services/contatos/updateContact";
+import { listAllContactsService } from "../services/contatos/listAllContacts";
+import { listContactsbyUserService } from "../services/contatos/listContactsbyUser";
 
 const createContactController = async (req: Request, res: Response): Promise<Response> => {
-    const { body } = req;
+    const body = req.body;
     const data = await createContactService(body);
     return res.status(201).send(data);
-  };
+};
 
-  const deleteContactController = async (req: Request, res: Response): Promise<Response> => {
-    const { id } = req.params;
+const deleteContactController = async (req: Request, res: Response): Promise<Response> => {
+    const id = req.params.id;
     const data = await deleteContactService(id);
     return res.status(200).send();
-  };
-// const listContactsController = async (req: Request, res: Response) => {
-//     const Contacts = await listContactsService()
-//     return res.json(Contacts)
-// }
+};
 
+const updateContactController = async (req: Request, res: Response): Promise<Response> => {
+    const { body, params } = req;
+    const data = await updateContactService(body, params.id);
+    return res.status(200).send(data);
+};
 
-//     const deleteContactsController = async (req: Request, res: Response) => {
-//     const id: string = req.params.id
-//     const Contacts = await deleteContactService(id)
-//     return res.status(204).send()
-// }
+const listAllContactsController = async (req: Request, res: Response): Promise<Response> => {
+    const data = await listAllContactsService();
+    return res.status(200).send(data);
+};
 
-//     const updateContactController = async (req: Request, res: Response) => {
-//     const update: IContactUpdate = req.body;
-//     const id: string = req.params.id;
-//     const data = await updateContactsService(id, update);
-//     return res.status(200).json(data);
-//   };
+const listContactsbyUserController = async (req: Request, res: Response): Promise<Response> => {
+    const {id} = req.params
+    const data = await listContactsbyUserService(id);
+    return res.status(200).send(data);
+};
+  
 
-export {createContactController, deleteContactController}
+export {createContactController, deleteContactController, updateContactController, listAllContactsController, listContactsbyUserController}
     
