@@ -7,13 +7,13 @@ const createContactSchema = yup.object().shape({
       .string()
       .email('Formato de email invalido')
       .required('Email é obrigatório'),
-    phoneNumber: yup.string().required('Telefone é obrigatório'),
+    phoneNumber: yup.number().required('Telefone é obrigatório'),
 })
 
 const contactReturnSchema = yup.object().shape({
     id: yup.string().uuid(),
     fullName: yup.string(),
-    phoneNumber: yup.string(),
+    phoneNumber: yup.number(),
     email: yup.string().email(),
     createdAt: yup.date(),
 })

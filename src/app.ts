@@ -7,7 +7,7 @@ import contactRoutes from "./routes/routesContacts"
 const app = express()
 app.use(express.json())
 
-app.use('/users', userRoutes)
+app.use('/', userRoutes)
 app.use('/contact', contactRoutes)
 
 export default app
